@@ -4,7 +4,7 @@ public class SpaceObjectController : MonoBehaviour
 {
     private float minX = -10.0f;
     public int maxHealth = 2;
-    public int damage = 1; // Amount oƒ damage received
+    public int damageReceived = 1; // Amount oƒ damage received
     public int damagePoints = 1; // Points earned for destroying the object
 
     private int currentHealth;
@@ -28,7 +28,7 @@ public class SpaceObjectController : MonoBehaviour
     // Takes damage and returns whether it has been destroyed or not.
     public bool TakeDamage()
     {
-        currentHealth -= damage;
+        currentHealth -= damageReceived;
         if (currentHealth < 0)
         {
             currentHealth = 0;

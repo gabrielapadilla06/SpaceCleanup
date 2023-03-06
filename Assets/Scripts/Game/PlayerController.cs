@@ -10,17 +10,13 @@ public class PlayerController : MonoBehaviour
     public float min_X, max_X;
 
     [SerializeField]
-    public Slider healthSlider;    
+    public Slider healthSlider;
 
     [SerializeField]
     public GameObject endDialog;
 
     [SerializeField]
-    public GameObject gameoverDialog;
-
-     [SerializeField]
     public GameObject quizDialog;
-
 
     [SerializeField]
     public GameObject scoreManager;
@@ -37,13 +33,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private Transform attack_Point2;
 
+    [SerializeField]
+    private GameObject Shield;
+
     public float attack_Timer = 0.35f;
     private float current_Attack_Timer;
 
     public int maxHealth = 15;
-    public int damage = 1; // Amount oƒ damage received
-    
-    public int life = 1;
+    public int damageReceived = 1; // Amount oƒ damage received
+
     private int currentHealth;
     private bool isBlinking = false;
 
@@ -58,7 +56,6 @@ public class PlayerController : MonoBehaviour
         healthSlider.value = currentHealth;
 
         endDialog.SetActive(false);
-        gameoverDialog.SetActive(false);
         quizDialog.SetActive(false);
     }
 
@@ -75,20 +72,27 @@ public class PlayerController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D hitInfo)
     {
-        // Spaceship should not be affected by collisions when blinking
+        GameObject hitObject = hitInfo.gameObject;
+        if (hitObject.layer == (int)GameLayer.Powerup)
+        {
+            HandlePowerUpCollision(hitObject);
+            return;
+        }
+
+        // Spaceship should not be affected by other object collisions when blinking
         if (isBlinking)
         {
             return;
         }
-        GameObject hitObject = hitInfo.gameObject;
+
         if (hitObject.layer == (int)GameLayer.Satellite || hitObject.layer == (int)GameLayer.Meteorite)
         {
             hitObject.GetComponent<SpaceObjectController>().TakeDamage();
             Destroy(hitObject);
-            
+
             var hasPlayerDied = TakeDamage();
-            if (hasPlayerDied) {
-                // TODO: Display game over dialog
+            if (hasPlayerDied)
+            {
                 Time.timeScale = 0f;
                 endDialog.SetActive(true);
                 Destroy(gameObject);
@@ -101,14 +105,7 @@ public class PlayerController : MonoBehaviour
                 StartCoroutine(Blink());
             }
         }
-        //PowerUp collision
-        else if (hitObject.layer == (int)GameLayer.Powerup)
-        {
-            currentHealth += life;
-            healthSlider.value = currentHealth;
-            Destroy(hitObject);
-            Debug.Log(currentHealth);
-        }
+
     }
 
     private void MovePlayer()
@@ -179,8 +176,7 @@ public class PlayerController : MonoBehaviour
 
     private bool TakeDamage()
     {
-        currentHealth -= damage;
-        Debug.Log(currentHealth);
+        currentHealth -= damageReceived;
         if (currentHealth < 0)
         {
             currentHealth = 0;
@@ -193,5 +189,26 @@ public class PlayerController : MonoBehaviour
         }
 
         return false;
+    }
+
+    private void HandlePowerUpCollision(GameObject hitObject)
+    {
+        if (hitObject.tag == GameTag.Battery)
+        {
+            var powerUpController = hitObject.GetComponent<LifePowerUpController>();
+            currentHealth += powerUpController.healthBonus;
+            if (currentHealth > maxHealth)
+            {
+                currentHealth = maxHealth;
+            }
+            healthSlider.value = currentHealth;
+        }
+        else if (hitObject.tag == GameTag.Shield)
+        {
+            var shieldController = Shield.GetComponent<ShieldController>();
+            var powerUpController = hitObject.GetComponent<ShieldPowerUpController>();
+            shieldController.Activate(powerUpController.activationTime);
+        }
+        Destroy(hitObject);
     }
 }

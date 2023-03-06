@@ -6,6 +6,12 @@ namespace Constants
         Meteorite = 9,
         Powerup = 10,
     }
+    
+    public static class GameTag
+    {
+        public const string Battery = "Battery";
+        public const string Shield = "Shield";
+    }
 
     public static class UserScene
     {

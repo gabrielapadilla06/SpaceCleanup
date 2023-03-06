@@ -10,13 +10,22 @@ public class PowerUpController : MonoBehaviour
     [SerializeField]
     private GameObject Battery;
 
+    [SerializeField]
+    private GameObject Shield;
+
+    private GameObject[] objectPool;
+
     private float maxX = 12.0f;
     private float minY = -4.0f;
     private float maxY = 4.0f;
 
     void Start()
     {
-        InvokeRepeating(nameof(BatteryObject), startTime, timeDelay);
+        objectPool = new GameObject[] {
+            Battery,
+            Shield
+        };
+        InvokeRepeating(nameof(SpawnRandomObject), startTime, timeDelay);
     }
 
     void Update()
@@ -24,9 +33,9 @@ public class PowerUpController : MonoBehaviour
         
     }
 
-    private void BatteryObject()
+    private void SpawnRandomObject()
     {
-        GameObject lifeObject = Battery;
+        GameObject randomObject = PickRandomObject();
         Vector3 spawnPosition;
         do
         {
@@ -35,8 +44,14 @@ public class PowerUpController : MonoBehaviour
         }
         while (Physics2D.OverlapCircle(spawnPosition, minSpawnRadius) != null);
 
-        GameObject objectInstance = Instantiate(lifeObject, spawnPosition, Quaternion.identity);
+        GameObject objectInstance = Instantiate(randomObject, spawnPosition, Quaternion.identity);
         objectInstance.GetComponent<Rigidbody2D>().velocity = Vector2.left * moveSpeed;
+    }
 
+    private GameObject PickRandomObject()
+    {
+        int randomIndex = UnityEngine.Random.Range(0, objectPool.Length);
+        GameObject selectedObject = objectPool[randomIndex];
+        return selectedObject;
     }
 }
