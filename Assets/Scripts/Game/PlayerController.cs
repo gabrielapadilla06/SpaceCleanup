@@ -16,6 +16,9 @@ public class PlayerController : MonoBehaviour
     public GameObject endDialog;
 
     [SerializeField]
+    public GameObject instructionsDialog;
+
+    [SerializeField]
     public GameObject quizDialog;
 
     [SerializeField]
@@ -48,6 +51,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        InitializeGame();
         current_Attack_Timer = attack_Timer;
         currentHealth = maxHealth;
 
@@ -210,5 +214,11 @@ public class PlayerController : MonoBehaviour
             shieldController.Activate(powerUpController.activationTime);
         }
         Destroy(hitObject);
+    }
+
+    public void InitializeGame()
+    {
+        Time.timeScale = 0f;
+        instructionsDialog.SetActive(true);
     }
 }
