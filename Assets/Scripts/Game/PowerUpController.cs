@@ -4,7 +4,7 @@ public class PowerUpController : MonoBehaviour
 {
     public float moveSpeed = 3.0f;
     public float startTime = 5.0f; // Seconds to wait before spawning objects 
-    public float timeDelay = 5.0f; // Time delay between each object spawn
+    public float timeDelay = 8.0f; // Time delay between each object spawn
     public float minSpawnRadius = 2.0f;
 
     [SerializeField]

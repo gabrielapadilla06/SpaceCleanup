@@ -2017,7 +2017,7 @@ MonoBehaviour:
   attack_Point2: {fileID: 1670745232}
   Shield: {fileID: 1546592507}
   attack_Timer: 0.35
-  maxHealth: 15
+  maxHealth: 10
   damageReceived: 1
 --- !u!50 &771951783
 Rigidbody2D:
@@ -3610,6 +3610,7 @@ GameObject:
   - component: {fileID: 1546592509}
   - component: {fileID: 1546592510}
   - component: {fileID: 1546592511}
+  - component: {fileID: 1546592512}
   m_Layer: 0
   m_Name: Shield
   m_TagString: Untagged
@@ -3715,6 +3716,27 @@ MonoBehaviour:
   fadeTime: 1
   minAlpha: 0
   maxAlpha: 0.8
+--- !u!50 &1546592512
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1546592507}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1602324677
 GameObject:
   m_ObjectHideFlags: 0

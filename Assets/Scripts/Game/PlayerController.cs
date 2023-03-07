@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
     public float attack_Timer = 0.35f;
     private float current_Attack_Timer;
 
-    public int maxHealth = 15;
+    public int maxHealth = 10;
     public int damageReceived = 1; // Amount oƒ damage received
 
     private int currentHealth;

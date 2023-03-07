@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using Constants;
 
 public class ShieldController : MonoBehaviour
 {
@@ -23,7 +24,6 @@ public class ShieldController : MonoBehaviour
         {
             CancelInvoke();
         }
-
         Show();
         Invoke(nameof(Hide), activationTime);
     }
@@ -83,5 +83,20 @@ public class ShieldController : MonoBehaviour
             objectColor.b,
             opacity
         );
+    }
+
+   void OnTriggerEnter2D(Collider2D hitInfo)
+    {
+        Debug.Log(isActive);
+        if (!isActive)
+        {
+            return;
+        }
+        GameObject hitObject = hitInfo.gameObject;
+        if (hitObject.layer == (int)GameLayer.Satellite || hitObject.layer == (int)GameLayer.Meteorite)
+        {
+            Destroy(hitObject);
+            Debug.Log("Destroyed");
+        }
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ShieldPowerUpController : MonoBehaviour
 {
-    public float activationTime = 3f;
+    public float activationTime = 4f;
     private float minX = -10.0f;
     void Start()
     {
