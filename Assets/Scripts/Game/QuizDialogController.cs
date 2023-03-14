@@ -45,8 +45,8 @@ public class QuizDialogController : MonoBehaviour
     {
         quizQuestion = questionData;
         questionContainer.text = questionData.Question.Text;
-        questionContainer.fontSize = questionData.Message.FontSize;
-        ConfigureOptions();
+        questionContainer.fontSize = questionData.Question.FontSize;
+        ConfigureButtons();
     }
 
     public void HandleBtnA()
@@ -93,7 +93,7 @@ public class QuizDialogController : MonoBehaviour
         Time.timeScale = resultsTimeScale;
     }
 
-    private void ConfigureOptions()
+    private void ConfigureButtons()
     {
         ResetButtonColors();
         var textA = buttonA.transform.GetChild(0).gameObject.GetComponent<TMP_Text>();
