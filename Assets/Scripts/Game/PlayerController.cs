@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     public Slider healthSlider;
 
     [SerializeField]
-    public GameObject endDialog;
+    public GameObject gameOverDialog;
 
     [SerializeField]
     public GameObject instructionsDialog;
@@ -96,7 +96,6 @@ public class PlayerController : MonoBehaviour
         }
 
         HandleObjectCollision(hitObject);
-
     }
 
     private void MovePlayer()
@@ -215,7 +214,7 @@ public class PlayerController : MonoBehaviour
             var hasPlayerDied = TakeDamage();
             if (hasPlayerDied)
             {
-                endDialog.GetComponent<GameOverController>().ShowDialog();
+                gameOverDialog.GetComponent<GameOverController>().ShowDialog();
                 Destroy(gameObject);
                 return;
             }

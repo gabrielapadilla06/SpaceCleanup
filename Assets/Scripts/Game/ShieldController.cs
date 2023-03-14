@@ -87,7 +87,6 @@ public class ShieldController : MonoBehaviour
 
    void OnTriggerEnter2D(Collider2D hitInfo)
     {
-        Debug.Log(isActive);
         if (!isActive)
         {
             return;
@@ -96,7 +95,6 @@ public class ShieldController : MonoBehaviour
         if (hitObject.layer == (int)GameLayer.Satellite || hitObject.layer == (int)GameLayer.Meteorite)
         {
             Destroy(hitObject);
-            Debug.Log("Destroyed");
         }
     }
 }

@@ -2373,8 +2373,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   questionContainer: {fileID: 989500395}
+  scoreController: {fileID: 1602324681}
   buttonA: {fileID: 643348702}
   buttonB: {fileID: 1316885895}
+  correctAnswerBonus: 15
+  showResultsTimeout: 3
+  buttonColor: {r: 0.30980393, g: 0.65882355, b: 0.90588236, a: 1}
+  correctButtonColor: {r: 0.21901156, g: 0.5471698, b: 0.27058825, a: 1}
+  wrongButtonColor: {r: 0.81960785, g: 0.2784314, b: 0.22745098, a: 1}
 --- !u!114 &734153660
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2455,7 +2461,7 @@ MonoBehaviour:
   min_X: -7.4
   max_X: -2
   healthSlider: {fileID: 1162912596}
-  endDialog: {fileID: 1230332502}
+  gameOverDialog: {fileID: 0}
   instructionsDialog: {fileID: 1113805053}
   quizDialog: {fileID: 734153657}
   scoreManager: {fileID: 1602324677}
@@ -6040,7 +6046,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   infoDialog: {fileID: 4754913829437750096}
-  maxDisplayedMessages: 3
+  scoreController: {fileID: 1602324681}
   timeBetweenMessages: 2
 --- !u!114 &1602324681
 MonoBehaviour:
@@ -6055,6 +6061,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreLabel: {fileID: 373070930}
+  winDialog: {fileID: 844971995}
+  gameOverDialog: {fileID: 1230332502}
+  totalQuestions: 4
 --- !u!114 &1602324682
 MonoBehaviour:
   m_ObjectHideFlags: 0
