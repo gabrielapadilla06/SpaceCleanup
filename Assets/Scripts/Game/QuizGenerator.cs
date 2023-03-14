@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Constants;
 using UnityEngine;
 
-public class InfoGenerator : MonoBehaviour
+public class QuizGenerator : MonoBehaviour
 {
     [SerializeField]
     private GameObject infoDialog;
@@ -14,12 +14,12 @@ public class InfoGenerator : MonoBehaviour
     private float timeBetweenMessages = 2.0f;
     
     private int displayedMessagesCount = 0;
-    private IList<InfoMessage> remainingMessages;
+    private IList<QuizQuestion> remainingMessages;
 
     // Start is called before the first frame update
     void Start()
     {
-        remainingMessages = new List<InfoMessage>(Data.InfoMessages);
+        remainingMessages = new List<QuizQuestion>(Quiz.Questions);
         ResetGenerator();
     }
 
@@ -37,13 +37,13 @@ public class InfoGenerator : MonoBehaviour
         displayedMessagesCount++;
         if (remainingMessages.Count > 0)
         {
-            var selectedMessage = PickRandomMessage();
+            var selectedQuestion = PickRandomQuestion();
             var infoDialogController = infoDialog.GetComponent<InfoDialogController>();
-            infoDialogController.ShowDialog(selectedMessage);
+            infoDialogController.ShowDialog(selectedQuestion);
         }
     }
 
-    private InfoMessage PickRandomMessage()
+    private QuizQuestion PickRandomQuestion()
     {
         int randomIndex = UnityEngine.Random.Range(0, remainingMessages.Count);
         var selectedMessage = remainingMessages[randomIndex];
