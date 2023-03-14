@@ -17,6 +17,11 @@ public class QuizDialogController : MonoBehaviour
 
     private QuizQuestion quizQuestion;
 
+     private void Start()
+    {
+        gameObject.SetActive(false);
+    }
+
     public void ShowDialog(QuizQuestion questionData)
     {
         quizQuestion = questionData;

@@ -39,6 +39,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private GameObject Shield;
 
+    [SerializeField]
+    private AudioSource PowerUpSound;
+
+    [SerializeField]
+    private AudioSource BulletSound;
+
+    [SerializeField]
+    private AudioSource MeteoriteSound;
+
     public float attack_Timer = 0.35f;
     private float current_Attack_Timer;
 
@@ -58,9 +67,6 @@ public class PlayerController : MonoBehaviour
         // Initialize health bar
         healthSlider.maxValue = maxHealth;
         healthSlider.value = currentHealth;
-
-        endDialog.SetActive(false);
-        quizDialog.SetActive(false);
     }
 
     // Update is called once per frame
@@ -89,26 +95,7 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        if (hitObject.layer == (int)GameLayer.Satellite || hitObject.layer == (int)GameLayer.Meteorite)
-        {
-            hitObject.GetComponent<SpaceObjectController>().TakeDamage();
-            Destroy(hitObject);
-
-            var hasPlayerDied = TakeDamage();
-            if (hasPlayerDied)
-            {
-                Time.timeScale = 0f;
-                endDialog.SetActive(true);
-                Destroy(gameObject);
-                return;
-            }
-
-            if (!isBlinking)
-            {
-                isBlinking = true;
-                StartCoroutine(Blink());
-            }
-        }
+        HandleObjectCollision(hitObject);
 
     }
 
@@ -161,6 +148,7 @@ public class PlayerController : MonoBehaviour
                 bullet1.GetComponent<BulletController>().scoreController = scoreController;
                 var bullet2 = Instantiate(player_Bullet, attack_Point2.position, Quaternion.identity);
                 bullet2.GetComponent<BulletController>().scoreController = scoreController;
+                BulletSound.Play();
             }
 
         }
@@ -213,7 +201,38 @@ public class PlayerController : MonoBehaviour
             var powerUpController = hitObject.GetComponent<ShieldPowerUpController>();
             shieldController.Activate(powerUpController.activationTime);
         }
+        PowerUpSound.Play();
         Destroy(hitObject);
+    }
+
+    private void HandleObjectCollision(GameObject hitObject)
+    {
+        if (hitObject.layer == (int)GameLayer.Satellite || hitObject.layer == (int)GameLayer.Meteorite)
+        {
+            hitObject.GetComponent<SpaceObjectController>().TakeDamage();
+            Destroy(hitObject);
+
+            var hasPlayerDied = TakeDamage();
+            if (hasPlayerDied)
+            {
+                endDialog.GetComponent<GameOverController>().ShowDialog();
+                Destroy(gameObject);
+                return;
+            }
+            else
+            {
+                if (hitObject.layer == (int)GameLayer.Meteorite)
+                {
+                    MeteoriteSound.Play();
+                }
+            }
+
+            if (!isBlinking)
+            {
+                isBlinking = true;
+                StartCoroutine(Blink());
+            }
+        }
     }
 
     public void InitializeGame()

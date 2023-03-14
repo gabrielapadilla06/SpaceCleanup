@@ -8,6 +8,9 @@ public class InfoDialogController : MonoBehaviour
     private TMP_Text messageContainer;
 
     [SerializeField]
+    private AudioSource MessageDialogSound;
+
+    [SerializeField]
     public GameObject quizDialog;
 
     private QuizQuestion quizQuestion;
@@ -26,6 +29,7 @@ public class InfoDialogController : MonoBehaviour
         messageContainer.fontSize = questionData.Message.FontSize;
         Time.timeScale = 0f;
         gameObject.SetActive(true);
+        MessageDialogSound.Play();
     }
 
     public void ShowQuiz()

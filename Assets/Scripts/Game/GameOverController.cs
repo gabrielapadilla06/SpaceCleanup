@@ -4,16 +4,20 @@ using UnityEngine.SceneManagement;
 
 public class GameOverController : MonoBehaviour
 {
+    [SerializeField]
+    private AudioSource GameOverSound;
+
     private void Start()
     {
-        //gameObject.SetActive(false);
+        gameObject.SetActive(false);
     }
 
-   // public void EndOfGame()
-    //{
-        //Time.timeScale = 0f;
-        //gameObject.SetActive(true);
-    //}
+    public void ShowDialog()
+    {
+        Time.timeScale = 0f;
+        gameObject.SetActive(true);
+        GameOverSound.Play();
+    }
 
     public void RetryGame()
     {
