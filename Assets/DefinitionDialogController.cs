@@ -1,20 +1,19 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class InstructionsDialogController : MonoBehaviour
+public class DefinitionDialogController : MonoBehaviour
 {
-    [SerializeField]
-    public GameObject defDialog;
     // Start is called before the first frame update
     void Start()
     {
-        defDialog.SetActive(false);
+        
     }
 
     // Update is called once per frame
     public void StartGame()
     {
-        Time.timeScale = 0f;
+        Time.timeScale = 1f;
         gameObject.SetActive(false);
-        defDialog.SetActive(true);
     }
 }
