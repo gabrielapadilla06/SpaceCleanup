@@ -1,19 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DefinitionDialogController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField]
+    private ScoreController scoreController;
 
     // Update is called once per frame
     public void StartGame()
     {
         Time.timeScale = 1f;
+        scoreController.RestartQuizTimer();
         gameObject.SetActive(false);
     }
 }

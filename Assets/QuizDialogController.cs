@@ -22,9 +22,6 @@ public class QuizDialogController : MonoBehaviour
     private int correctAnswerBonus;
 
     [SerializeField]
-    private float showResultsTimeout = 1.0f;
-
-    [SerializeField]
     private Color buttonColor;
 
     [SerializeField]
@@ -32,6 +29,9 @@ public class QuizDialogController : MonoBehaviour
 
     [SerializeField]
     private Color wrongButtonColor;
+
+    [SerializeField]
+    private float showResultsTimeout = 1.0f; // In seconds
 
     private float resultsTimeScale = 0.01f; // Time scale to use when showing results
     private QuizQuestion quizQuestion;
@@ -64,9 +64,18 @@ public class QuizDialogController : MonoBehaviour
         var isCorrectAnswer = clickedBtn == quizQuestion.CorrectAnswer;
         if (isCorrectAnswer)
         {
-            scoreController.AddAnswerBonus(correctAnswerBonus);
+            scoreController.AddCorrectAnswerPoints(correctAnswerBonus);
         }
         ChangeButtonColor(clickedBtn, isCorrectAnswer);
+        var scaledResultsTimeout = showResultsTimeout*resultsTimeScale;
+        if (scoreController.HasQuizEnded())
+        {
+            Invoke(nameof(ShowEndMessage), scaledResultsTimeout);
+        }
+        else
+        {
+            Invoke(nameof(ResumeGame), scaledResultsTimeout);
+        }
     }
 
     private void ChangeButtonColor(AnswerBtn clickedBtn, bool isCorrectAnswer)
@@ -82,7 +91,6 @@ public class QuizDialogController : MonoBehaviour
             buttonB.GetComponent<Image>().color = newColor;
         }
         Time.timeScale = resultsTimeScale;
-        Invoke(nameof(ResumeGame), showResultsTimeout*resultsTimeScale);
     }
 
     private void ConfigureOptions()
@@ -102,10 +110,18 @@ public class QuizDialogController : MonoBehaviour
         buttonB.GetComponent<Image>().color = buttonColor;
     }
 
-    private void ResumeGame()
+    private void ShowEndMessage()
     {
         ResetButtonColors();
+        scoreController.ShowEndMessage();
+        gameObject.SetActive(false);
+    }
+
+    private void ResumeGame()
+    {
         Time.timeScale = 1f;
+        ResetButtonColors();
+        scoreController.RestartQuizTimer();
         gameObject.SetActive(false);
     }
 }

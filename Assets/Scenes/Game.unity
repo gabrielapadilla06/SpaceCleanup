@@ -553,8 +553,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: GameOverController, Assembly-CSharp
+      - m_Target: {fileID: 844972000}
+        m_TargetAssemblyTypeName: WinDialogController, Assembly-CSharp
         m_MethodName: ReturnMenu
         m_Mode: 1
         m_Arguments:
@@ -1619,6 +1619,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da566fa8455b7754287d1413e1d76801, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scoreController: {fileID: 1602324681}
 --- !u!114 &491192695
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2377,10 +2378,10 @@ MonoBehaviour:
   buttonA: {fileID: 643348702}
   buttonB: {fileID: 1316885895}
   correctAnswerBonus: 15
-  showResultsTimeout: 3
   buttonColor: {r: 0.30980393, g: 0.65882355, b: 0.90588236, a: 1}
   correctButtonColor: {r: 0.21901156, g: 0.5471698, b: 0.27058825, a: 1}
   wrongButtonColor: {r: 0.81960785, g: 0.2784314, b: 0.22745098, a: 1}
+  showResultsTimeout: 3
 --- !u!114 &734153660
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6046,8 +6047,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   infoDialog: {fileID: 4754913829437750096}
-  scoreController: {fileID: 1602324681}
-  timeBetweenMessages: 2
 --- !u!114 &1602324681
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6063,6 +6062,8 @@ MonoBehaviour:
   scoreLabel: {fileID: 373070930}
   winDialog: {fileID: 844971995}
   gameOverDialog: {fileID: 1230332502}
+  quizGenerator: {fileID: 1602324680}
+  timeBetweenQuestions: 2
   totalQuestions: 4
 --- !u!114 &1602324682
 MonoBehaviour:
@@ -7658,8 +7659,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: GameOverController, Assembly-CSharp
+      - m_Target: {fileID: 844972000}
+        m_TargetAssemblyTypeName: WinDialogController, Assembly-CSharp
         m_MethodName: RetryGame
         m_Mode: 1
         m_Arguments:

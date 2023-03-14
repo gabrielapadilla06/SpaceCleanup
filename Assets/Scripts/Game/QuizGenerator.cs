@@ -6,40 +6,18 @@ public class QuizGenerator : MonoBehaviour
 {
     [SerializeField]
     private GameObject infoDialog;
-    
-    [SerializeField]
-    private ScoreController scoreController;
-
-    [SerializeField]
-    private float timeBetweenMessages = 2.0f;
-    
-    private IList<QuizQuestion> remainingMessages;
+  
+    private IList<QuizQuestion> remainingQuestions;
 
     // Start is called before the first frame update
     void Start()
     {
-        remainingMessages = new List<QuizQuestion>(Quiz.Questions);
-        ResetGenerator();
+        remainingQuestions = new List<QuizQuestion>(Quiz.Questions);
     }
 
-    // Reset the generation of messages at the start and after continue button is clicked.
-    // If it should not display more questions, show end message.
-    public void ResetGenerator()
+    public void ShowRandomQuestion()
     {
-        if (scoreController.ShouldDisplayQuestions())
-        {
-            Invoke(nameof(ShowRandomMessage), timeBetweenMessages);
-        }
-        else
-        {
-            scoreController.DisplayEndMessage();
-        }
-    }
-
-    private void ShowRandomMessage()
-    {
-        scoreController.UpdateQuestionCounter();
-        if (remainingMessages.Count > 0)
+        if (remainingQuestions.Count > 0)
         {
             var selectedQuestion = PickRandomQuestion();
             var infoDialogController = infoDialog.GetComponent<InfoDialogController>();
@@ -49,9 +27,9 @@ public class QuizGenerator : MonoBehaviour
 
     private QuizQuestion PickRandomQuestion()
     {
-        int randomIndex = UnityEngine.Random.Range(0, remainingMessages.Count);
-        var selectedMessage = remainingMessages[randomIndex];
-        remainingMessages.RemoveAt(randomIndex);
+        int randomIndex = UnityEngine.Random.Range(0, remainingQuestions.Count);
+        var selectedMessage = remainingQuestions[randomIndex];
+        remainingQuestions.RemoveAt(randomIndex);
         return selectedMessage;
     }
 }

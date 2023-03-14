@@ -13,6 +13,12 @@ public class ScoreController : MonoBehaviour
     public GameObject gameOverDialog;
 
     [SerializeField]
+    private QuizGenerator quizGenerator;
+
+    [SerializeField]
+    private float timeBetweenQuestions = 2.0f;
+
+    [SerializeField]
     private int totalQuestions = 4;
 
     private int displayedQuestionsCount = 0;
@@ -27,32 +33,37 @@ public class ScoreController : MonoBehaviour
         UpdateScore();
     }
 
-    public void AddPoints(int points)
-    {
-        score += points;
-        UpdateScore();
-    }
-
-    public bool ShouldDisplayQuestions()
-    {
-        return displayedQuestionsCount < totalQuestions;
-    }
-
-    // Updates the displayed question counter.
-    public void UpdateQuestionCounter()
-    {
-        displayedQuestionsCount++;
-    }
-   
-    // Adds bonus for a correct answer.
-    public void AddAnswerBonus(int bonus)
+    // Adds bonus points for a correct answer.
+    public void AddCorrectAnswerPoints(int bonusPoints)
     {
         correctAnswersCount++;
-        score += bonus;
+        AddPoints(bonusPoints);
+    }
+
+    // Adds bonus points.
+    public void AddPoints(int bonusPoints)
+    {
+        score += bonusPoints;
         UpdateScore();
     }
 
-    public void DisplayEndMessage()
+    public bool HasQuizEnded()
+    {
+        return displayedQuestionsCount == totalQuestions;
+    }
+
+    public void RestartQuizTimer()
+    {
+        Invoke(nameof(ShowQuiz), timeBetweenQuestions);
+    }
+
+    public void ShowQuiz()
+    {
+        displayedQuestionsCount++;
+        quizGenerator.ShowRandomQuestion();
+    }
+
+    public void ShowEndMessage()
     {
         if (correctAnswersCount == totalQuestions)
         {
