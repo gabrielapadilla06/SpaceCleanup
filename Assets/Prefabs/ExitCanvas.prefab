@@ -284,6 +284,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ConfirmWindow: {fileID: 9222897150601945611}
   noButton: {fileID: 3755994791962201812}
+  ButtonSound: {fileID: 0}
 --- !u!1 &1611807505795834222
 GameObject:
   m_ObjectHideFlags: 0

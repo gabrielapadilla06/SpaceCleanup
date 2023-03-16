@@ -8,6 +8,9 @@ public class ExitWindow : MonoBehaviour
     [SerializeField]
     public Button noButton;
 
+    [SerializeField]
+    private AudioSource ButtonSound;
+
     private void Start()
     {
         noButton.onClick.AddListener(CloseWindow);

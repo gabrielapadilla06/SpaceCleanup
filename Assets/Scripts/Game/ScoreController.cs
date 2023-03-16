@@ -16,7 +16,7 @@ public class ScoreController : MonoBehaviour
     private QuizGenerator quizGenerator;
 
     [SerializeField]
-    private float timeBetweenQuestions = 2.0f;
+    private float timeBetweenQuestions = 20.0f;
 
     [SerializeField]
     private int totalQuestions = 4;

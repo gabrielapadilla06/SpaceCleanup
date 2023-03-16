@@ -31,7 +31,7 @@ public class QuizDialogController : MonoBehaviour
     private Color wrongButtonColor;
 
     [SerializeField]
-    private float showResultsTimeout = 1.0f; // In seconds
+    private float showResultsTimeout = 0.5f; // In seconds
 
     private float resultsTimeScale = 0.01f; // Time scale to use when showing results
     private QuizQuestion quizQuestion;
