@@ -2708,7 +2708,7 @@ MonoBehaviour:
   buttonColor: {r: 0.30980393, g: 0.65882355, b: 0.90588236, a: 1}
   correctButtonColor: {r: 0.4862745, g: 0.7529412, b: 0.2509804, a: 1}
   wrongButtonColor: {r: 0.90588236, g: 0.3884961, b: 0.30196083, a: 1}
-  showResultsTimeout: 2
+  showResultsTimeout: 1.5
 --- !u!114 &734153660
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2789,7 +2789,7 @@ MonoBehaviour:
   min_X: -7.4
   max_X: -2
   healthSlider: {fileID: 1162912596}
-  gameOverDialog: {fileID: 0}
+  gameOverDialog: {fileID: 1230332502}
   instructionsDialog: {fileID: 1113805053}
   quizDialog: {fileID: 734153657}
   scoreManager: {fileID: 1602324677}
@@ -2802,7 +2802,7 @@ MonoBehaviour:
   BulletSound: {fileID: 771951788}
   MeteoriteSound: {fileID: 771951789}
   attack_Timer: 0.35
-  maxHealth: 10
+  maxHealth: 8
   damageReceived: 1
 --- !u!50 &771951783
 Rigidbody2D:
@@ -7063,8 +7063,8 @@ MonoBehaviour:
   winDialog: {fileID: 844971995}
   gameOverDialog: {fileID: 1230332502}
   quizGenerator: {fileID: 1602324680}
-  timeBetweenQuestions: 20
-  totalQuestions: 4
+  timeBetweenQuestions: 15
+  totalQuestions: 5
 --- !u!114 &1602324682
 MonoBehaviour:
   m_ObjectHideFlags: 0
